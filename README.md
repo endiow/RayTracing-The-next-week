@@ -45,3 +45,5 @@
 使用多个频率相加得到复合噪声
 
 ![images](./RayTracing_1/output/perlin6.png)
+
+对于不同参数得到其他效果，可以深入学习分形布朗运动（‌FBM）‌
