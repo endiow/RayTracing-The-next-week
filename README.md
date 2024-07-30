@@ -48,4 +48,10 @@
 
 ![images](./RayTracing_1/output/perlin6.png)
 
-对于不同参数得到其他效果，可以深入学习分形布朗运动（‌FBM）‌
+对于不同参数得到其他效果，可以深入学习分形布朗运动（‌FBM）
+
+
+
+参考文章：http://t.csdnimg.cn/Whhex
+
+https://zhuanlan.zhihu.com/p/129372723
