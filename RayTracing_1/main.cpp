@@ -81,7 +81,8 @@ int main()
 
 	//物体初始化
 	HitableList world;
-	world = random_scene_1_moving();
+	//world = random_scene_1_moving();
+	world = two_perlin_spheres();
 	//world.add(make_shared<Sphere>(Vec3(0, 0, -1), 0.5, make_shared<Lambertian>(Vec3(0.1, 0.2, 0.5))));
 	//world.add(make_shared<Sphere>(Vec3(0, -100.5, -1), 100, make_shared<Lambertian>(Vec3(0.8, 0.8, 0.0))));
 	//world.add(make_shared<Sphere>(Vec3(1, 0, -1), 0.5, make_shared<Metal>(Vec3(0.8, 0.6, 0.2), 0.0)));

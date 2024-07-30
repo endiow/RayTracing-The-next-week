@@ -48,6 +48,12 @@
     <ClInclude Include="header\BVH.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="header\Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="header\Perlin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

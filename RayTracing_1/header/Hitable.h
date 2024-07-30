@@ -13,6 +13,8 @@ struct HitRecord   //命中结果
 	Vec3 Normal;	//法线
 	bool front_face;//判断法线方向
 	shared_ptr<Material> mat_ptr;	//材质
+	double u;	//纹理
+	double v;
 
 	inline void set_face_normal(const Ray& r, const Vec3& outward_normal) 
 	{

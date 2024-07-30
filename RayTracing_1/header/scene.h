@@ -8,7 +8,7 @@ static HitableList random_scene_0_final()
 {
 	HitableList world;
 
-	world.add(make_shared<Sphere>(Vec3(0, -1000, 0), 1000, make_shared<Lambertian>(Vec3(0.5, 0.5, 0.5))));
+	world.add(make_shared<Sphere>(Vec3(0, -1000, 0), 1000, make_shared<Lambertian>(make_shared<constant_texture>(Vec3(0.5, 0.5, 0.5)))));
 
 	int i = 1;
 	for (int a = -11; a < 11; a++)
@@ -23,7 +23,7 @@ static HitableList random_scene_0_final()
 				{
 					// diffuse
 					auto albedo = Vec3(random_double(0, 1), random_double(0, 1), random_double(0, 1)) * Vec3(random_double(0, 1), random_double(0, 1), random_double(0, 1));
-					world.add(make_shared<Sphere>(center, 0.2, make_shared<Lambertian>(albedo)));
+					world.add(make_shared<Sphere>(center, 0.2, make_shared<Lambertian>(make_shared<constant_texture>(albedo))));
 				}
 				else if (choose_mat < 0.95)
 				{
@@ -43,7 +43,7 @@ static HitableList random_scene_0_final()
 
 	world.add(make_shared<Sphere>(Vec3(0, 1, 0), 1.0, make_shared<Dielectric>(1.5)));
 
-	world.add(make_shared<Sphere>(Vec3(-4, 1, 0), 1.0, make_shared<Lambertian>(Vec3(0.4, 0.2, 0.1))));
+	world.add(make_shared<Sphere>(Vec3(-4, 1, 0), 1.0, make_shared<Lambertian>(make_shared<constant_texture>(Vec3(0.4, 0.2, 0.1)))));
 
 	world.add(make_shared<Sphere>(Vec3(4, 1, 0), 1.0, make_shared<Metal>(Vec3(0.7, 0.6, 0.5), 0.0)));
 
@@ -55,7 +55,11 @@ HitableList random_scene_1_moving()
 {
 	HitableList world;
 
-	world.add(make_shared<Sphere>(Vec3(0, -1000, 0), 1000, make_shared<Lambertian>(Vec3(0.5, 0.5, 0.5))));
+	//world.add(make_shared<Sphere>(Vec3(0, -1000, 0), 1000, make_shared<Lambertian>(make_shared<constant_texture>(Vec3(0.5, 0.5, 0.5)))));
+
+	auto checker = make_shared<checker_texture>(make_shared<constant_texture>(Vec3(0.2, 0.3, 0.1)),make_shared<constant_texture>(Vec3(0.9, 0.9, 0.9)));
+
+	world.add(make_shared<Sphere>(Vec3(0, -1000, 0), 1000, make_shared<Lambertian>(checker)));
 
 	int i = 1;
 	for (int a = -10; a < 10; a++) 
@@ -70,7 +74,7 @@ HitableList random_scene_1_moving()
 				{
 					// diffuse
 					auto albedo = Vec3::random() * Vec3::random();
-					world.add(make_shared<Moving_Sphere>(center, center + Vec3(0, random_double(0, .5), 0), 0.0, 1.0, 0.2,make_shared<Lambertian>(albedo)));
+					world.add(make_shared<Moving_Sphere>(center, center + Vec3(0, random_double(0, .5), 0), 0.0, 1.0, 0.2,make_shared<Lambertian>(make_shared<constant_texture>(albedo))));
 				}
 				else if (choose_mat < 0.95) 
 				{
@@ -88,8 +92,21 @@ HitableList random_scene_1_moving()
 	}
 
 	world.add(make_shared<Sphere>(Vec3(0, 1, 0), 1.0, make_shared<Dielectric>(1.5)));
-	world.add(make_shared<Sphere>(Vec3(-4, 1, 0), 1.0, make_shared<Lambertian>(Vec3(0.4, 0.2, 0.1))));
+	world.add(make_shared<Sphere>(Vec3(-4, 1, 0), 1.0, make_shared<Lambertian>(make_shared<constant_texture>(Vec3(0.4, 0.2, 0.1)))));
 	world.add(make_shared<Sphere>(Vec3(4, 1, 0), 1.0, make_shared<Metal>(Vec3(0.7, 0.6, 0.5), 0.0)));
 
+	//将最后一个bvh_node（即根节点）推入了hittable_list的队列里面
 	return static_cast<HitableList>(make_shared<bvh_node>(world, 0, 1));
+}
+
+
+HitableList two_perlin_spheres() 
+{
+	HitableList objects;
+
+	auto pertext = make_shared<noise_texture>(10.0);
+	objects.add(make_shared<Sphere>(Vec3(0, -1000, 0), 1000, make_shared<Lambertian>(pertext)));
+	objects.add(make_shared<Sphere>(Vec3(0, 2, 0), 2, make_shared<Lambertian>(pertext)));
+
+	return objects;
 }

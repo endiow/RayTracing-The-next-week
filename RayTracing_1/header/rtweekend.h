@@ -28,6 +28,16 @@ inline double ffmin(double a, double b) { return a <= b ? a : b; }
 inline double ffmax(double a, double b) { return a >= b ? a : b; }
 
 //随机数
+inline double rand_double() 
+{
+    return rand() / (RAND_MAX + 1.0);
+}
+
+inline double rand_double(double min, double max) 
+{
+    return min + (max - min) * rand_double();
+}
+
 inline double random_double(double min, double max)
 {
     static std::uniform_real_distribution<double> distribution(min, max);   //生成[min,max]范围内的浮点数
