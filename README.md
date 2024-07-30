@@ -6,7 +6,7 @@
 
 ## BVH树：
 
-![image](https://github.com/user-attachments/assets/b25d770e-5c44-4b00-9a00-c954f7081b16)
+![image](./images/bvh.png)
 
 使用bvh后速度大大提升
 
