@@ -49,7 +49,7 @@ Vec3 random_unit_vector()
 //直接从入射点开始选取一个随机的方向, 然后再判断是否在法向量所在的那个半球
 Vec3 random_in_hemisphere(const Vec3& normal) 
 {
-	Vec3 in_unit_sphere = RandomInUnitSphere();
+	Vec3 in_unit_sphere = UnitVector(RandomInUnitSphere());
 	if (Dot(in_unit_sphere, normal) > 0.0) // In the same hemisphere as the normal
 		return in_unit_sphere;
 	else

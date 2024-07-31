@@ -43,8 +43,8 @@ static Vec3 Color(const Ray& r, const Vec3& background, const Hitable& world, in
 
 int main()
 {
-	const int nx = 800;//图片宽度（单位为像素）
-	const int ny = 400;//图片高度（单位为像素）
+	const int nx = 400;//图片宽度（单位为像素）
+	const int ny = 225;//图片高度（单位为像素）
 	const int ns = 100;//扫描次数
 	const int max_depth = 50;
 	const double aspect_ratio = double(nx) / ny;
@@ -79,16 +79,17 @@ int main()
 	auto aperture = 0.0;
 	auto vfov = 40.0;
 
-	Camera camera(lookfrom, lookat, vup, vfov, aspect_ratio, aperture, dist_to_focus, 0.0, 1.0);
-	//Camera camera(Vec3(20,20,20), Vec3(0, 2, 0), vup, 20.0, aspect_ratio, aperture, dist_to_focus, 0.0, 1.0);
+	//Camera camera(lookfrom, lookat, vup, vfov, aspect_ratio, aperture, dist_to_focus, 0.0, 0.0);
+	Camera camera(Vec3(13,2,3), Vec3(0, 2, 0), vup, 20.0, aspect_ratio, aperture, dist_to_focus, 0.0, 1.0);
 
 	//物体初始化
 	HitableList world;
+	world = random_scene_0_final();
 	//world = random_scene_1_moving();
 	//world = two_perlin_spheres();
 	//world = earth();
 	//world = simple_light();
-	world = cornell_box();
+	//world = cornell_box();
 	//world.add(make_shared<Sphere>(Vec3(0, 0, -1), 0.5, make_shared<Lambertian>(Vec3(0.1, 0.2, 0.5))));
 	//world.add(make_shared<Sphere>(Vec3(0, -100.5, -1), 100, make_shared<Lambertian>(Vec3(0.8, 0.8, 0.0))));
 	//world.add(make_shared<Sphere>(Vec3(1, 0, -1), 0.5, make_shared<Metal>(Vec3(0.8, 0.6, 0.2), 0.0)));

@@ -133,12 +133,12 @@ HitableList simple_light()
 	auto pertext = make_shared<noise_texture>(4);
 	auto green = make_shared<constant_texture>(Vec3(0.12, 0.45, 0.15));
 	auto black = make_shared<constant_texture>(Vec3(0.2, 0.2, 0.2));
-	objects.add(make_shared<Sphere>(Vec3(0, -1000, 0), 1000, make_shared<Lambertian>(green)));
+	objects.add(make_shared<Sphere>(Vec3(0, -1000, 0), 1000, make_shared<Lambertian>(pertext)));
 	objects.add(make_shared<Sphere>(Vec3(0, 2, 0), 2, make_shared<Lambertian>(pertext)));
 
 	auto difflight = make_shared<diffuse_light>(make_shared<constant_texture>(Vec3(4, 4, 4)));
-	objects.add(make_shared<Sphere>(Vec3(0, 7, 0), 3, difflight));
-	//objects.add(make_shared<xy_rect>(3, 5, 1, 3, -2, difflight));
+	objects.add(make_shared<Sphere>(Vec3(0, 7, 0), 2, difflight));
+	objects.add(make_shared<xy_rect>(3, 5, 1, 3, -2, difflight));
 
 	return objects;
 }
@@ -152,9 +152,9 @@ HitableList cornell_box()
 	auto green = make_shared<Lambertian>(make_shared<constant_texture>(Vec3(0.12, 0.45, 0.15)));
 	auto light = make_shared<diffuse_light>(make_shared<constant_texture>(Vec3(15, 15, 15)));
 
+	objects.add(make_shared<xz_rect>(213, 343, 227, 332, 554, light));
 	objects.add(make_shared<yz_rect>(0, 555, 0, 555, 555, green));
 	objects.add(make_shared<yz_rect>(0, 555, 0, 555, 0, red));
-	objects.add(make_shared<Sphere>(Vec3(270,270,270), 80, light));
 	objects.add(make_shared<xz_rect>(0, 555, 0, 555, 0, white));
 	objects.add(make_shared<xy_rect>(0, 555, 0, 555, 555, white));
 	objects.add(make_shared<xz_rect>(0, 555, 0, 555, 555, white));

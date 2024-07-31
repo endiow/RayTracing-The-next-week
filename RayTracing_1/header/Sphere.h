@@ -41,7 +41,7 @@ bool Sphere::Hit(const Ray& R, double TMin, double TMax, HitRecord& Rec)const
 			//保存入射点的解、入射点位置和入射点法线到Rec中
 			Rec.T = Temp;
 			Rec.P = R.PointAtParameter(Rec.T);
-			Vec3 outward_normal = (Rec.P - Center) / Radius;
+			Vec3 outward_normal = UnitVector((Rec.P - Center) / Radius);
 			Rec.set_face_normal(R, outward_normal);		//设置法线
 			Rec.mat_ptr = mat_ptr;
 			get_sphere_uv((Rec.P - Center) / Radius, Rec.u, Rec.v);		//获取纹理坐标
@@ -54,7 +54,7 @@ bool Sphere::Hit(const Ray& R, double TMin, double TMax, HitRecord& Rec)const
 			//保存入射点的解、入射点位置和入射点法线到Rec中
 			Rec.T = Temp;
 			Rec.P = R.PointAtParameter(Rec.T);
-			Vec3 outward_normal = (Rec.P - Center) / Radius;
+			Vec3 outward_normal = UnitVector((Rec.P - Center) / Radius);
 			Rec.set_face_normal(R, outward_normal);
 			Rec.mat_ptr = mat_ptr;
 			get_sphere_uv((Rec.P - Center) / Radius, Rec.u, Rec.v);
@@ -120,7 +120,7 @@ bool Moving_Sphere::Hit(const Ray& R, double TMin, double TMax, HitRecord& Rec) 
 			//保存入射点的解、入射点位置和入射点法线到Rec中
 			Rec.T = Temp;
 			Rec.P = R.PointAtParameter(Rec.T);
-			Vec3 outward_normal = (Rec.P - Center(R.time())) / Radius;
+			Vec3 outward_normal = UnitVector((Rec.P - Center(R.time())) / Radius);
 			Rec.set_face_normal(R, outward_normal);
 			Rec.mat_ptr = mat_ptr;
 			return true;
@@ -132,7 +132,7 @@ bool Moving_Sphere::Hit(const Ray& R, double TMin, double TMax, HitRecord& Rec) 
 			//保存入射点的解、入射点位置和入射点法线到Rec中
 			Rec.T = Temp;
 			Rec.P = R.PointAtParameter(Rec.T);
-			Vec3 outward_normal = (Rec.P - Center(R.time())) / Radius;
+			Vec3 outward_normal = UnitVector((Rec.P - Center(R.time())) / Radius);
 			Rec.set_face_normal(R, outward_normal);
 			Rec.mat_ptr = mat_ptr;
 			return true;
