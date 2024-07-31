@@ -28,7 +28,7 @@ class Hitable
 public:
 	//TMin与TMax分别表示检测射线的开始与结束点对应地系数T
 	//也就是检测射线为R = P(TMin)到R=P(TMax）之间得这段射线
-	virtual bool Hit(const Ray& R, double TMin, double TMax, HitRecord& Rec) const = 0;//虚函数
+	virtual bool Hit(const Ray& R, double TMin, double TMax, HitRecord& Rec) const = 0;//纯虚函数
 
 	virtual bool bounding_box(double t0, double t1, aabb& output_box) const = 0;
 };

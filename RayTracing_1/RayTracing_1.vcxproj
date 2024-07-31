@@ -144,12 +144,14 @@
     <ClInclude Include="header\Camera.h" />
     <ClInclude Include="header\Hitable.h" />
     <ClInclude Include="header\HitableList.h" />
+    <ClInclude Include="header\Image.h" />
     <ClInclude Include="header\Material.h" />
     <ClInclude Include="header\Perlin.h" />
     <ClInclude Include="header\Ray.h" />
     <ClInclude Include="header\rtweekend.h" />
     <ClInclude Include="header\scene.h" />
     <ClInclude Include="header\Sphere.h" />
+    <ClInclude Include="header\stb_image.h" />
     <ClInclude Include="header\Texture.h" />
     <ClInclude Include="header\Vec3.h" />
   </ItemGroup>

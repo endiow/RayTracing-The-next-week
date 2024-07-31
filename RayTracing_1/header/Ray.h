@@ -9,7 +9,7 @@ class Ray
 	double tm;
 
 public:
-	Ray() { A = Vec3(0, 0, 0), B = Vec3(0, 0, 0); }
+	Ray() { A = Vec3(0, 0, 0), B = Vec3(0, 0, 0), tm = 0; }
 	Ray(const Vec3& a, const Vec3& b, double time) { A = a; B = b; tm = time; }	 //构造函数，初始化原点向量A和方向向量B
 
 	Vec3 Origin() const { return A; } //返回原点向量A
@@ -49,7 +49,7 @@ Vec3 random_unit_vector()
 //直接从入射点开始选取一个随机的方向, 然后再判断是否在法向量所在的那个半球
 Vec3 random_in_hemisphere(const Vec3& normal) 
 {
-	Vec3 in_unit_sphere = random_unit_vector();
+	Vec3 in_unit_sphere = RandomInUnitSphere();
 	if (Dot(in_unit_sphere, normal) > 0.0) // In the same hemisphere as the normal
 		return in_unit_sphere;
 	else

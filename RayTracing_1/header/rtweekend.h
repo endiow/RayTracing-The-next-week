@@ -27,6 +27,11 @@ inline double degrees_to_radians(double degrees)
 inline double ffmin(double a, double b) { return a <= b ? a : b; }
 inline double ffmax(double a, double b) { return a >= b ? a : b; }
 
+inline int colCap(int x) 
+{
+    return x > 255 ? 255 : x;
+}
+
 //Ëæ»úÊı
 inline double rand_double() 
 {

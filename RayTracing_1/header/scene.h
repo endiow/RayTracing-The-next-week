@@ -3,6 +3,9 @@
 #include "Material.h"
 #include "Sphere.h"
 #include "BVH.h"
+#include "Image.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 static HitableList random_scene_0_final()
 {
@@ -108,5 +111,52 @@ HitableList two_perlin_spheres()
 	objects.add(make_shared<Sphere>(Vec3(0, -1000, 0), 1000, make_shared<Lambertian>(pertext)));
 	objects.add(make_shared<Sphere>(Vec3(0, 2, 0), 2, make_shared<Lambertian>(pertext)));
 
+	return objects;
+}
+
+HitableList earth()
+{
+	int nx, ny, nn;
+	unsigned char* texture_data = stbi_load("images/earthmap.jpg", &nx, &ny, &nn, 0);
+
+	auto earth_surface =
+		make_shared<Lambertian>(make_shared<image_texture>(texture_data, nx, ny));
+	auto globe = make_shared<Sphere>(Vec3(0, 0, 0), 2, earth_surface);
+
+	return HitableList(globe);
+}
+
+HitableList simple_light() 
+{
+	HitableList objects;
+
+	auto pertext = make_shared<noise_texture>(4);
+	auto green = make_shared<constant_texture>(Vec3(0.12, 0.45, 0.15));
+	auto black = make_shared<constant_texture>(Vec3(0.2, 0.2, 0.2));
+	objects.add(make_shared<Sphere>(Vec3(0, -1000, 0), 1000, make_shared<Lambertian>(green)));
+	objects.add(make_shared<Sphere>(Vec3(0, 2, 0), 2, make_shared<Lambertian>(pertext)));
+
+	auto difflight = make_shared<diffuse_light>(make_shared<constant_texture>(Vec3(4, 4, 4)));
+	objects.add(make_shared<Sphere>(Vec3(0, 7, 0), 3, difflight));
+	//objects.add(make_shared<xy_rect>(3, 5, 1, 3, -2, difflight));
+
+	return objects;
+}
+
+HitableList cornell_box()
+{
+	HitableList objects;
+
+	auto red = make_shared<Lambertian>(make_shared<constant_texture>(Vec3(0.65, 0.05, 0.05)));
+	auto white = make_shared<Lambertian>(make_shared<constant_texture>(Vec3(0.73, 0.73, 0.73)));
+	auto green = make_shared<Lambertian>(make_shared<constant_texture>(Vec3(0.12, 0.45, 0.15)));
+	auto light = make_shared<diffuse_light>(make_shared<constant_texture>(Vec3(15, 15, 15)));
+
+	objects.add(make_shared<yz_rect>(0, 555, 0, 555, 555, green));
+	objects.add(make_shared<yz_rect>(0, 555, 0, 555, 0, red));
+	objects.add(make_shared<Sphere>(Vec3(270,270,270), 80, light));
+	objects.add(make_shared<xz_rect>(0, 555, 0, 555, 0, white));
+	objects.add(make_shared<xy_rect>(0, 555, 0, 555, 555, white));
+	objects.add(make_shared<xz_rect>(0, 555, 0, 555, 555, white));
 	return objects;
 }

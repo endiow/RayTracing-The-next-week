@@ -12,6 +12,11 @@ public:
 		*参数包括:入射光线、命中信息、衰减，散射。
 	*/
 	virtual bool Scatter(const Ray& RIn, const HitRecord& Rec, Vec3& Attenuation, Ray& Scattered) const = 0;
+
+	virtual Vec3 emitted(double u, double v, const Vec3& p) const	//发射光线，只有光源实现
+	{
+		return Vec3(0.0, 0.0, 0.0);
+	}
 };
 
 class Lambertian : public Material
@@ -27,9 +32,9 @@ public:
 	virtual bool Scatter(const Ray& RIn, const HitRecord& Rec, Vec3& Attenuation, Ray& Scattered) const
 	{
 		//入射点单位切球内随机点
-		Vec3 Target = Rec.P + Rec.Normal + random_unit_vector();	//以入射点法线端点为圆心的圆内的 的随机射线
+		Vec3 Target = Rec.P + random_in_hemisphere(Rec.Normal);	//以入射点法线端点为圆心的圆内的 的随机射线
 
-		Scattered = Ray(Rec.P, Target - Rec.P, RIn.time());//光线Ray的散射光线
+		Scattered = Ray(Rec.P, Target - Rec.P, RIn.time());		//光线Ray的散射光线
 		Attenuation = Albedo->value(Rec.u, Rec.v, Rec.P);	//返回衰减变量
 		return true;
 	}
@@ -119,4 +124,22 @@ public:
 };
 
 
+//光源
+class diffuse_light : public Material 
+{
+public:
+	diffuse_light(shared_ptr<texture> a) : emit(a) {}
 
+	virtual bool Scatter(const Ray& RIn, const HitRecord& Rec, Vec3& Attenuation, Ray& Scattered) const
+	{
+		return false;
+	}
+
+	virtual Vec3 emitted(double u, double v, const Vec3& p) const 
+	{
+		return emit->value(u, v, p);
+	}
+
+public:
+	shared_ptr<texture> emit;
+};

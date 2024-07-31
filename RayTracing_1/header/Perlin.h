@@ -34,11 +34,13 @@ inline double perlin_interp(Vec3 c[2][2][2], double u, double v, double w)
         for (int j = 0; j < 2; j++)
             for (int k = 0; k < 2; k++) 
             {
-                Vec3 weight_v(u - i, v - j, w - k); //该点到各个晶格顶点的距离向量
+                Vec3 weight_v(u - i, v - j, w - k);     //该点到各个晶格顶点的距离向量
                 accum += (i * uu + (1 - i) * (1 - uu)) 
                        * (j * vv + (1 - j) * (1 - vv)) 
                        * (k * ww + (1 - k) * (1 - ww)) 
-                       * Dot(c[i][j][k], weight_v);     //距离向量点乘梯度向量得到权重
+                       * Dot(c[i][j][k], weight_v);     //距离向量点乘梯度向量
+                //三线性插值得到的结果还在正方体中，用梯度向量后得到的结果却可以跳出正方体
+                //也就是说，可以取得的颜色更广，自然也就没有方块感
             }
 
     return accum;
@@ -98,14 +100,19 @@ public:
     double turb(const Vec3& p, int depth = 7) const 
     {
         auto accum = 0.0;
-        Vec3 temp_p = p;
-        auto weight = 1.0;
+
+        //lacunarity和gain则是用于修改amplitude和frequency 的值，让每次叠加的噪声权值和大小都不同。
+        float lacunarity = 0.5;
+        float gain = 2;
+
+        float amplitude = 1.0;  //每一次噪声叠加的权值
+        float frequency = 1.0;   //叠加噪声的比例
 
         for (int i = 0; i < depth; i++) 
         {
-            accum += weight * noise(temp_p);
-            weight *= 0.5;
-            temp_p *= 2;
+            accum += amplitude * noise(frequency * p);
+            amplitude *= lacunarity;
+            frequency *= gain;
         }
 
         return fabs(accum);     //返回绝对值
