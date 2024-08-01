@@ -31,7 +31,7 @@ Vec3 RandomInUnitSphere()
 {
 	while (true) 
 	{
-		auto p = Vec3(random_double(-1, 1), random_double(-1, 1), random_double(-1, 1));
+		auto p = Vec3::random(-1, 1);
 		if (p.SquaredLength() >= 1) continue;	//点在球外就重新生成直到该点在球内
 		return p;
 	}
@@ -49,7 +49,7 @@ Vec3 random_unit_vector()
 //直接从入射点开始选取一个随机的方向, 然后再判断是否在法向量所在的那个半球
 Vec3 random_in_hemisphere(const Vec3& normal) 
 {
-	Vec3 in_unit_sphere = UnitVector(RandomInUnitSphere());
+	Vec3 in_unit_sphere = RandomInUnitSphere();
 	if (Dot(in_unit_sphere, normal) > 0.0) // In the same hemisphere as the normal
 		return in_unit_sphere;
 	else

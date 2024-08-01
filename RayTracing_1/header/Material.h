@@ -32,7 +32,7 @@ public:
 	{
 		//入射点单位切球内随机点
 		Vec3 Target = Rec.P + Rec.Normal + RandomInUnitSphere();	//以入射点法线端点为圆心的圆内的 的随机射线
-		//Vec3 Target = Rec.P + random_unit_vector();
+		//Target = UnitVector(Target);
 
 		Scattered = Ray(Rec.P, Target - Rec.P, RIn.time());		//光线Ray的散射光线
 		Attenuation = Albedo->value(Rec.u, Rec.v, Rec.P);	//返回衰减变量

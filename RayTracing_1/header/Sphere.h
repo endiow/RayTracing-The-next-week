@@ -13,9 +13,9 @@ public:
 	Sphere() {}
 	Sphere(Vec3 Cen, double R, shared_ptr<Material> m) :Center(Cen), Radius(R), mat_ptr(m) {};	//构造函数，初始化球心与半径
 
-	inline virtual bool Hit(const Ray& R, double TMin, double TMax, HitRecord& Rec) const;	//继承Hitable的Hit
+	virtual bool Hit(const Ray& R, double TMin, double TMax, HitRecord& Rec) const;	//继承Hitable的Hit
 
-	bool bounding_box(double t0, double t1, aabb& output_box) const;	//计算包围盒
+	virtual bool bounding_box(double t0, double t1, aabb& output_box) const;	//计算包围盒
 
 	void get_sphere_uv(const Vec3& p, double& u, double& v) const;	//算出球体u,v坐标
 };
@@ -92,11 +92,11 @@ public:
 	Moving_Sphere(Vec3 cen0, Vec3 cen1, double t0, double t1, double r, shared_ptr<Material> m)
 		: Center0(cen0), Center1(cen1), time0(t0), time1(t1), Radius(r), mat_ptr(m) {};	//构造函数，初始化球心与半径
 
-	inline virtual bool Hit(const Ray& R, double TMin, double TMax, HitRecord& Rec) const;	//继承Hitable的Hit
+	virtual bool Hit(const Ray& R, double TMin, double TMax, HitRecord& Rec) const;	//继承Hitable的Hit
 
 	Vec3 Center(double time) const;
 
-	bool bounding_box(double t0, double t1, aabb& output_box) const;
+	virtual bool bounding_box(double t0, double t1, aabb& output_box) const;
 };
 
 //如果射线R在Tmin与Tmax范围内命中当前球体，则返回true

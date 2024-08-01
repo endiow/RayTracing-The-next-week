@@ -22,7 +22,7 @@ public:
 
 	virtual bool Hit(const Ray& R, double TMin, double TMax, HitRecord& Rec)const;
 
-	bool bounding_box(double t0, double t1, aabb& output_box) const;
+	virtual bool bounding_box(double t0, double t1, aabb& output_box) const;
 };
 
 //快速地找出射线命中的距离最近的对象（因为渲染只渲染最前面的，后面的被前面的挡住了）
