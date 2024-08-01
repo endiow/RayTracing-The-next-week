@@ -71,3 +71,5 @@ RayTracing的版本太多了，每个版本都有不同，导致我的cornell bo
 参考文章：http://t.csdnimg.cn/Whhex
 
 https://zhuanlan.zhihu.com/p/129372723
+
+http://t.csdnimg.cn/0X1Ga
