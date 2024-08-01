@@ -54,7 +54,7 @@
 
 RayTracing的版本太多了，每个版本都有不同，导致我的cornell box出现了非常奇葩的bug
 
-![images](./RayTracing_1/output/issue.png)
+![images](./RayTracing_1/images/issue.png)
 
 光线似乎并不朝所有方向发射
 
