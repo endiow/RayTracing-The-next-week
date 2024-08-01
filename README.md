@@ -50,7 +50,23 @@
 
 对于不同参数得到其他效果，可以深入学习分形布朗运动（‌FBM）
 
+## cornell box
 
+RayTracing的版本太多了，每个版本都有不同，导致我的cornell box出现了非常奇葩的bug
+
+![images](./RayTracing_1/output/issue.png)
+
+光线似乎并不朝所有方向发射
+
+最烦的是，我修好了这个bug，平面又不显示了
+
+最后还是去官网啃英语，重写了version 4 （其实当做复习也挺好的）
+
+![image](./RayTracing_1_v4/output/cornell box.png)
+
+## 最终场景
+
+![image](./RayTracing_1_v4/output/final.png)
 
 参考文章：http://t.csdnimg.cn/Whhex
 
