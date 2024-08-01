@@ -62,7 +62,7 @@ RayTracing的版本太多了，每个版本都有不同，导致我的cornell bo
 
 最后还是去官网啃英语，重写了version 4 （其实当做复习也挺好的）
 
-![image](./RayTracing_1_v4/output/cornell box.png)
+![image](./RayTracing_1_v4/output/cornell_box.png)
 
 ## 最终场景
 
